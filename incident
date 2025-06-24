@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Incident Counter</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #00ffcc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      font-size: 4em;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="message">Loading...</div>
+
+  <script>
+    // Set the date of the last incident
+    const lastIncidentDate = new Date("2023-11-01"); // YYYY-MM-DD
+
+    function updateMessage() {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const diffTime = today - lastIncidentDate;
+      const daysAgo = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      document.getElementById("message").textContent = 
+        `Last incident reported ${daysAgo} day${daysAgo === 1 ? '' : 's'} ago`;
+    }
+
+    updateMessage();
+
+    // Optional: refresh at midnight
+    const now = new Date();
+    const millisUntilMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1) - now;
+    setTimeout(() => location.reload(), millisUntilMidnight);
+  </script>
+</body>
+</html>
